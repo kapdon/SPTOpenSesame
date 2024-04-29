@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using HarmonyLib;
 
+using PatchConstants = StayInTarkov.StayInTarkovHelperConstants;
+
 namespace SPTOpenSesame.Helpers
 {
     public static class LocalizationUtil
@@ -23,7 +25,7 @@ namespace SPTOpenSesame.Helpers
         {
             // Find the class responsible for managing locales and translations
             string methodName = "AddLocaleUpdateListener";
-            Type[] localeManagerTypeOptions = Aki.Reflection.Utils.PatchConstants.EftTypes.Where(t => t.GetMethods().Any(m => m.Name.Contains(methodName))).ToArray();
+            Type[] localeManagerTypeOptions = PatchConstants.EftTypes.Where(t => t.GetMethods().Any(m => m.Name.Contains(methodName))).ToArray();
             if (localeManagerTypeOptions.Length != 1)
             {
                 throw new TypeLoadException("Cannot find type containing method " + methodName);
